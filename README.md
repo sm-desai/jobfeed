@@ -5,6 +5,11 @@ and it pulls matching openings from public job APIs, scores them, and gives you
 a clean CLI + web UI to triage and track applications — all in a local SQLite
 file. No scraping, no account, nothing leaves your machine except the API calls.
 
+> ⚠️ **A fun weekend project, vibe-coded for the joy of it.** It's not
+> production software, it has no tests to speak of, and a job site changing its
+> API will happily break it. Provided **as-is** with no warranty (see
+> [LICENSE](LICENSE)). Use at your own risk, PRs welcome, no support promised. 🙂
+
 ```
 python jf.py init "registered nurse"
 python jf.py fetch
@@ -106,9 +111,21 @@ The `token` is the board slug (e.g. `boards.greenhouse.io/<token>`).
 
 ## Data & privacy
 
-Everything lives in local files (`jobs.db`, `config.yaml`, `.env`) — all
-gitignored. The only network calls are to the public job APIs you enabled.
+Everything lives in **local files on your machine** — `jobs.db` (the jobs),
+`config.yaml` (your settings), and `.env` (your own API key). All three are
+gitignored, so cloning or forking never carries anyone's data or keys. You bring
+your own free Adzuna key; it stays in `.env` and is only ever sent to Adzuna.
+The only network calls are to the public job APIs you turn on. There's no
+account, no analytics, no server.
+
+## Third-party services
+
+jobfeed talks to public job APIs — **Adzuna, Remotive, RemoteOK**, and
+optionally the public **Greenhouse / Ashby / Lever** board APIs. It is **not
+affiliated with, endorsed by, or connected to** any of them; those names are
+trademarks of their respective owners. Please respect each API's terms of
+service and rate limits (you supply your own keys).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE). Do whatever you like with it.
