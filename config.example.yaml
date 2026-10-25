@@ -1,0 +1,63 @@
+# Example jobfeed config (for reference). Generate your own with:
+#   python jf.py init "your profession"
+# This one is tuned for a software engineer, with a couple of scoring tweaks.
+profession: "Software Engineer"
+
+query:
+  adzuna_what: "software engineer"
+  remotive_category: "software-dev"
+
+titles:
+  include:
+    - "(?i)\\bsoftware engineer\\b"
+    - "(?i)\\bbackend engineer\\b"
+    - "(?i)\\bfull.?stack engineer\\b"
+  exclude:
+    - "(?i)\\bintern\\b"
+    - "(?i)\\bmanager\\b"
+
+locations:
+  accept_remote_us: true
+  states: []                 # empty = any US location; or e.g. [CA, NY, WA, TX]
+  city_hints: {}
+  remote_hints: [Remote, Anywhere, Distributed, "Work from home", "US - Remote",
+                 "Remote - US", "Remote (US)"]
+  reject_hints: [Canada, "United Kingdom", London, Dublin, Berlin, Amsterdam,
+                 Bangalore, India, Singapore, Sydney, Tokyo, Toronto, Vancouver]
+
+compensation:
+  drop_below: null
+  flag_below: 120000
+  treat_missing_as: unknown
+
+scoring:
+  keyword_boosts:
+    "(?i)\\bpython\\b": 8
+    "(?i)\\bgolang|\\bgo\\b": 6
+    "(?i)distributed systems": 10
+  keyword_penalties:
+    "(?i)security clearance|TS/SCI": -30
+    "(?i)\\bphp\\b": -8
+  state_boosts: { CA: 6, NY: 4, WA: 4 }
+  remote_boost: 6
+  freshness:
+    posted_within_3_days: 10
+    posted_within_7_days: 5
+    older_than_30_days: -12
+
+digest:
+  top_n: 25
+  min_score: 0
+
+fetch:
+  max_requests_per_second: 8
+  timeout_seconds: 10
+  retries: 1
+
+sources:
+  adzuna: true
+  remotive: true
+  remoteok: true
+  greenhouse: false
+  ashby: false
+  lever: false

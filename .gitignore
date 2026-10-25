@@ -1,0 +1,11 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+fetch.log
+fetch_stdout.log
+jobs.db
+jobs.db.bak
+config.yaml
+targets.csv
+.DS_Store
